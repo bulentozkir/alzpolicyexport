@@ -1,0 +1,49 @@
+{
+ "properties": {
+  "displayName": "Deny vNet peering ",
+  "policyType": "Custom",
+  "mode": "All",
+  "description": "This policy denies the creation of vNet Peerings under the assigned scope.",
+  "metadata": {
+   "version": "1.0.1",
+   "category": "Network",
+   "source": "https://github.com/Azure/Enterprise-Scale/",
+   "alzCloudEnvironments": [
+    "AzureCloud",
+    "AzureChinaCloud",
+    "AzureUSGovernment"
+   ],
+   "createdBy": "775e7001-b0ec-4fa7-8d44-3bb867c48d1c",
+   "createdOn": "2022-10-30T21:31:16.1304095Z",
+   "updatedBy": null,
+   "updatedOn": null
+  },
+  "parameters": {
+   "effect": {
+    "type": "String",
+    "metadata": {
+     "displayName": "Effect",
+     "description": "Enable or disable the execution of the policy"
+    },
+    "allowedValues": [
+     "Audit",
+     "Deny",
+     "Disabled"
+    ],
+    "defaultValue": "Deny"
+   }
+  },
+  "policyRule": {
+   "if": {
+    "field": "type",
+    "equals": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings"
+   },
+   "then": {
+    "effect": "[parameters('effect')]"
+   }
+  }
+ },
+ "id": "/providers/Microsoft.Management/managementGroups/alz/providers/Microsoft.Authorization/policyDefinitions/Deny-VNet-Peering",
+ "type": "Microsoft.Authorization/policyDefinitions",
+ "name": "Deny-VNet-Peering"
+}
